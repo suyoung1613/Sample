@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+header Chain of Responsibility
+() customer #FF6200EE
+abstract class CaffeManager #c9edad{
++ String processMenuOrder(String menu) //주문 프로세스
+{abstract} boolean makeBeverage(String menu)  // 음료제조
++ CaffeManager nextManager(CaffeManager nextManager)
+{abstract} String beverageType // 제조 가능 beverageType
+- CaffeManager nextManager // 제조 실패시 떠넘길 nextManager
+}
+
+class AmericanoManager #c7fce8{
+{method} beverageType
+{method} makeBeverage()
+}
+class LatteManager  #c7fce8{
+{method} beverageType
+{method} makeBeverage()
+}
+class AdeManager  #c7fce8{
+{method} beverageType
+{method} makeBeverage()
+}
+
+customer  - AmericanoManager : processMenuOrder(menu)
+
+CaffeManager <|-- AmericanoManager
+CaffeManager <|-- LatteManager
+CaffeManager <|-- AdeManager
+@enduml
