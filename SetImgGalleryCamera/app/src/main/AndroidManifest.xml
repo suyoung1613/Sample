@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.imageuploadtest">
 
-<!--    <uses-feature android:name="android.hardware.camera" />-->
+    <!--앱애서 카메라 기능을 쓴다고 알려줍니다.
+     required ="true" 시 카메라가 없는 기기는 구글플레이에서 앱 다운로드가 불가합니다.-->
+    <uses-feature android:name="android.hardware.camera"  android:required="true" />
+
+
+    <!--앱에서 파일 저장이 필요 할 경우-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
     <application
         android:allowBackup="true"
@@ -20,6 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
     </application>
 
 </manifest>
